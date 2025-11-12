@@ -1,6 +1,8 @@
 #ifndef __THREADS_HPP
 #define __THREADS_HPP
 
+#include <type_traits>
+
 /**
  * @class BaseThread
  * @brief Defines the interface of a thread class
@@ -20,11 +22,11 @@ public:
  * @brief Inforces a thread class follows the interface
  * 		(only after C++20)
  */
-#if __cplusplus > 202002L
+#if __cplusplus >= 202002L
 template<class Base>
 concept ThreadInterface = 
-	std::is_base_of_v<SuperBase,Base> &&
-    !std::is_same_v<SuperBase,Base>;
+	std::is_base_of_v<BaseThread,Base> &&
+    !std::is_same_v<BaseThread,Base>;
 #else
 #define ThreadInterface class
 #endif
