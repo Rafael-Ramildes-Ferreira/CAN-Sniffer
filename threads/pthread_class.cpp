@@ -16,7 +16,6 @@ void PthreadClass::launch(){
 
 void PthreadClass::run(){
 	pthread_mutex_init(&this->cond_lock, NULL);
-	pthread_cond_init(&this->cond, NULL);
 
 	this->setup();
 

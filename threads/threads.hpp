@@ -11,12 +11,51 @@
 class BaseThread
 {
 public:
+	/**
+	 * @brief Launches the thread in a platform-agnostic signature.
+	 * 		Call BaseThread::launch() in the object to start 
+	 * 		execution without directly access the OS interface.
+	 */
 	virtual void launch() = 0;
+
+	/**
+	 * @brief Launches the BaseThread::setup and BaseThread::loop.
+	 * 		This initializes and uses the lock to halt execution at
+	 * 		the end of each iteration.
+	 */
 	virtual void run() = 0;
+
+	/**
+	 * @brief Releases execution lock.
+	 * 		Call at the end of the BaseThread::loop() to immediately 
+	 * 		loop back to the beginning
+	 */
 	virtual void dispatch() = 0;
+	
+
+	/**
+	 * @brief Waits for a signal to continue execution.
+	 * 		It locks the execution of the thread at each iteration
+	 * 		For continuous execution, use this->dispatch() at the end of
+	 *		BaseThread::loop()
+	 */
 	virtual void waitDispatch() = 0;
+
+	/**
+	 * @brief Implemented by the end user to configure the 
+	 * 		application.
+	 */
 	virtual void setup() = 0;
+
+	/**
+	 * @brief Implemented by the end user to execute in loop.
+	 */
 	virtual void loop() = 0;
+
+	/**
+	 * @brief Waits for the thread to finish execution.
+	 * 		This implements a platform-agnostic signature.
+	 */
 	virtual void join() = 0;
 };
 

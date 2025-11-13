@@ -13,9 +13,12 @@ class PthreadClass : public BaseThread
 {
 private:
 	pthread_mutex_t cond_lock;
-	pthread_cond_t cond;
 	pthread_t thread;
 
+	/**
+	 * @brief Calls this->run()
+	 * @param arg: pointer to this
+	 */
 	static void *entry_point(void *arg);
 
 public:
