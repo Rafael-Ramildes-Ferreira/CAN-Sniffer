@@ -22,6 +22,7 @@ public:
 	void launch() override;
 	void run() override;
 	void dispatch() override;
+	void waitDispatch() override;
 	virtual void setup() = 0;
 	virtual void loop() = 0;
 	virtual void join() override;

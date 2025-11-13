@@ -14,14 +14,15 @@ public:
 	virtual void launch() = 0;
 	virtual void run() = 0;
 	virtual void dispatch() = 0;
+	virtual void waitDispatch() = 0;
 	virtual void setup() = 0;
 	virtual void loop() = 0;
 	virtual void join() = 0;
 };
 
 /**
- * @interface Defines the interface of the thread
- * @brief Inforces a thread class follows the interface
+ * @interface Defines the thread interface
+ * @brief Enforces a thread class follows the interface
  * 		(only after C++20)
  */
 #if __cplusplus >= 202002L

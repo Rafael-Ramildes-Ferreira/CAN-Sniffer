@@ -15,8 +15,10 @@ public:
 		std::cout << "Iniciando uma thread, yay!" << std::endl;
 	}
 	void loop() override {
-		for(long int i = 0; i < 1000000000; i++);
+		for(long int i = 0; i < 100000000; i++);
 		std::cout << "I can do this all day!" << std::endl;
+
+		this->dispatch();
 	}
 };
 
