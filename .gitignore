@@ -1,3 +1,7 @@
 *.out
 *.o
 .vscode
+*.swp
+library.json
+build
+

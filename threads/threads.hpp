@@ -108,6 +108,5 @@ concept ThreadInterface =
 #define ThreadInterface class
 #endif
 
-class FreeRTOSThread : public BaseThread {};
 
 #endif // __THREADS_HPP

@@ -1,3 +1,4 @@
+#ifdef __linux__
 #include "pthread_class.hpp"
 
 
@@ -31,3 +32,4 @@ void PthreadClass::waitDispatch(){
 void PthreadClass::join(){
 	pthread_join(this->thread, NULL);
 }
+#endif // __linux__

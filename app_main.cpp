@@ -5,13 +5,15 @@
 #ifdef __linux__
 #include "threads/pthread_class.hpp"
 #include <iostream>
-#endif // __linux__
+#else // __linux__
+#include "threads/freertos_thread.hpp"
+#endif // Not __linux__ 
 
 
 
-void app_main(){
-	Communicator<PthreadClass> t;
-	Logger<PthreadClass> t2;
+void sniffer_main(){
+	Communicator<FreeRTOSThread> t;
+	Logger<FreeRTOSThread> t2;
 
 	std::function<void(void*)> logger_hook (
 		[&t2](void*arg)->void {
@@ -32,7 +34,7 @@ void app_main(){
 
 #ifdef __linux__
 int main(){
-	app_main();
+	sniffer_main();
 	return 0;
 }
 #endif // __linux__
