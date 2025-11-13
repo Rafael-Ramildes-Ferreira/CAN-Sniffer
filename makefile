@@ -1,12 +1,12 @@
 CC = g++
-CFLAGS = -Wall -Wextra -std=c++20
+CFLAGS = -Wall -Wextra -std=c++20 -pthread
 RM = rm -f
 
 OUT = a.out
 
 SRCS = $(shell find . -name '*.cpp')
 
-all: $(OUT)
+all: $(OUT) $(SRCS)
 
 $(OUT): $(SRCS)
 	$(CC) $(CFLAGS) -o $(OUT) $(SRCS)

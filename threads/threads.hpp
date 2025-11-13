@@ -11,10 +11,12 @@
 class BaseThread
 {
 public:
+	virtual void launch() = 0;
 	virtual void run() = 0;
 	virtual void dispatch() = 0;
 	virtual void setup() = 0;
 	virtual void loop() = 0;
+	virtual void join() = 0;
 };
 
 /**
@@ -32,7 +34,5 @@ concept ThreadInterface =
 #endif
 
 class FreeRTOSThread : public BaseThread {};
-
-class PthreadClass : public BaseThread {};
 
 #endif // __THREADS_HPP

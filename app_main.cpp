@@ -1,6 +1,35 @@
 #include "threads/threads.hpp"
 
+#ifdef __linux__
+#include "threads/pthread_class.hpp"
+#include <iostream>
+#endif // __linux__
+
+
+
+template<ThreadInterface Thread>
+class Teste : public Thread
+{
+public:
+	void setup() override {
+		std::cout << "Iniciando uma thread, yay!" << std::endl;
+	}
+	void loop() override {
+		for(long int i = 0; i < 1000000000; i++);
+		std::cout << "I can do this all day!" << std::endl;
+	}
+};
+
 void app_main(){
+	Teste<PthreadClass> t;
+	Teste<PthreadClass> t2;
+
+	t.launch();
+	t2.launch();
+
+	t.join();
+	t2.join();
+
 	return;
 }
 
