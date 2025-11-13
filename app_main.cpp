@@ -1,4 +1,5 @@
-#include "threads/threads.hpp"
+#include "application/logger.hpp"
+#include "application/communicator.hpp"
 
 #ifdef __linux__
 #include "threads/pthread_class.hpp"

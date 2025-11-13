@@ -20,9 +20,10 @@ public:
 	void launch() override;
 	void dispatch() override;
 	void waitDispatch() override;
+	virtual void join() override;
+	
 	virtual void setup() = 0;
 	virtual void loop() = 0;
-	virtual void join() override;
 };
 
 #endif // __PTHREAD_CLASS_HPP
