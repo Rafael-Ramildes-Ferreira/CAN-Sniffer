@@ -13,4 +13,6 @@ public:
 	void loop() override;
 };
 
+#include "logger.tpp"
+
 #endif // LOGGER_HPP

@@ -2,18 +2,22 @@
 #define COMMUNICATOR_HPP
 
 #include "../threads/threads.hpp"
+#include <functional>
 
 
 template<ThreadInterface Thread>
 class Communicator : public Thread{
 private:
-	void (*message_received_hook)(void*);
+	std::function<void(void*)> *message_received_hook;
 public:
 	Communicator() : message_received_hook(nullptr) {};
-	void setMessageReceivedHook(void *func);
+	void setMessageReceivedHook(std::function<void(void*)> *func) 
+		{message_received_hook = func;};
 
 	void setup() override;
 	void loop() override;
 };
+
+#include "communicator.tpp"
 
 #endif // COMMUNICATOR_HPP
