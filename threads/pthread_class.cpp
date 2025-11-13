@@ -1,31 +1,12 @@
 #include "pthread_class.hpp"
 
 
-void *PthreadClass::entry_point(void *arg){
-	auto self = static_cast<PthreadClass*>(arg);
-	self->run();
-
-	self->dispatch();
-
-	return nullptr;
+void PthreadClass::begin(){
+	pthread_mutex_init(&this->cond_lock, NULL);
 }
 
 void PthreadClass::launch(){
-	pthread_create(&this->thread, NULL, PthreadClass::entry_point, this);
-}
-
-void PthreadClass::run(){
-	pthread_mutex_init(&this->cond_lock, NULL);
-
-	this->setup();
-
-	int i = 0;
-	while(i < 10){
-		this->waitDispatch();
-
-		this->loop();
-		i++;
-	}
+	pthread_create(&this->thread, NULL, BaseThread::entry_point, this);
 }
 
 /**

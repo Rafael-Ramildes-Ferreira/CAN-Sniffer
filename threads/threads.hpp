@@ -11,19 +11,52 @@
 class BaseThread
 {
 public:
+	/* Basic behavior ----------------------------------------------*/
 	/**
-	 * @brief Launches the thread in a platform-agnostic signature.
-	 * 		Call BaseThread::launch() in the object to start 
-	 * 		execution without directly access the OS interface.
+	 * @brief Calls this->run()
+	 * @param arg: pointer to this
 	 */
-	virtual void launch() = 0;
+	// [TODO] Test if arg is nulptr
+	static void *entry_point(void *arg){
+		auto self = static_cast<BaseThread*>(arg);
+		self->run();
+
+		self->dispatch();
+
+		return nullptr;
+	}
 
 	/**
 	 * @brief Launches the BaseThread::setup and BaseThread::loop.
 	 * 		This initializes and uses the lock to halt execution at
 	 * 		the end of each iteration.
 	 */
-	virtual void run() = 0;
+	virtual void run(){
+		this->begin();
+		this->setup();
+
+		int i = 0;
+		while(i < 10){
+			this->waitDispatch();
+
+			this->loop();
+			i++;
+		}
+	};
+
+
+	/* Platform specific -------------------------------------------*/
+	/**
+	 * @brief Initiallizes any necessary component for the platform.
+	 */
+	virtual void begin() = 0;
+
+	/**
+	 * @brief Launches the thread in a platform-agnostic signature.
+	 * 		Call BaseThread::launch() in the object to start 
+	 * 		execution without directly access the OS interface.
+	 */
+	virtual void launch() = 0;
 
 	/**
 	 * @brief Releases execution lock.
@@ -42,6 +75,14 @@ public:
 	virtual void waitDispatch() = 0;
 
 	/**
+	 * @brief Waits for the thread to finish execution.
+	 * 		This implements a platform-agnostic signature.
+	 */
+	virtual void join() = 0;
+
+
+	/* User implemented methods ------------------------------------*/
+	/**
 	 * @brief Implemented by the end user to configure the 
 	 * 		application.
 	 */
@@ -51,12 +92,6 @@ public:
 	 * @brief Implemented by the end user to execute in loop.
 	 */
 	virtual void loop() = 0;
-
-	/**
-	 * @brief Waits for the thread to finish execution.
-	 * 		This implements a platform-agnostic signature.
-	 */
-	virtual void join() = 0;
 };
 
 /**

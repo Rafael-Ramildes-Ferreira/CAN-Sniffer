@@ -9,21 +9,15 @@
  * @brief To test on Linux this class substitutes FreeRTOS-based 
  * 		class maintaining the interface
  */
-class PthreadClass : public BaseThread 
+class PthreadClass : private BaseThread 
 {
 private:
 	pthread_mutex_t cond_lock;
 	pthread_t thread;
 
-	/**
-	 * @brief Calls this->run()
-	 * @param arg: pointer to this
-	 */
-	static void *entry_point(void *arg);
-
 public:
+	void begin() override;
 	void launch() override;
-	void run() override;
 	void dispatch() override;
 	void waitDispatch() override;
 	virtual void setup() = 0;
