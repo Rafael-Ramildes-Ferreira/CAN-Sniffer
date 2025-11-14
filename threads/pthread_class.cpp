@@ -7,7 +7,7 @@ void PthreadClass::begin(){
 }
 
 void PthreadClass::launch(){
-	pthread_create(&this->thread, NULL, BaseThread::entry_point, this);
+	pthread_create(&this->thread, NULL, (void*(*)(void*))BaseThread::entry_point, this);
 }
 
 /**

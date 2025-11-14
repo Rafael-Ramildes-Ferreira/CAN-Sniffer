@@ -16,6 +16,7 @@ private:
 	pthread_t thread;
 
 public:
+	PthreadClass() { this->begin(); };
 	void begin() override;
 	void launch() override;
 	void dispatch() override;

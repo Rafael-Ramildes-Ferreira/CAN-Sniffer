@@ -17,13 +17,11 @@ public:
 	 * @param arg: pointer to this
 	 */
 	// [TODO] Test if arg is nulptr
-	static void *entry_point(void *arg){
+	static void entry_point(void *arg){
 		auto self = static_cast<BaseThread*>(arg);
 		self->run();
 
 		self->dispatch();
-
-		return nullptr;
 	}
 
 	/**
@@ -32,15 +30,12 @@ public:
 	 * 		the end of each iteration.
 	 */
 	virtual void run(){
-		this->begin();
 		this->setup();
 
-		int i = 0;
-		while(i < 10){
+		while(1){
 			this->waitDispatch();
 
 			this->loop();
-			i++;
 		}
 	};
 
