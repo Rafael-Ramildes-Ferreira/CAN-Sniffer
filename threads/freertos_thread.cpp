@@ -34,6 +34,8 @@ void FreeRTOSThread::dispatch(){
 }
 
 void FreeRTOSThread::waitDispatch(){
+	// Not always the task will have to wait. Force it to wait to allow the watchdog reset 
+	vTaskDelay(10/portTICK_PERIOD_MS);
 	while(xSemaphoreTake(this->cond_lock,portMAX_DELAY) != pdTRUE);
 }
 
