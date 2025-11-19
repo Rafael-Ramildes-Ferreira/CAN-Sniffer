@@ -11,7 +11,7 @@ This project was developed for the course *C++ Programming for Embedded Systems*
 )
 This version is for the halfway assignment submission. The classes interface are implemented as planned in:
 
-![Block Diagram](.\img\block_diagram.svg)
+![Block Diagram](img/block_diagram.svg)
 
 Code executes both in Linux and in ESP32. Bluetooth is fully implemented and working (only for ESP32).
 
