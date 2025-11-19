@@ -24,6 +24,7 @@ Logger<Thread>& Logger<Thread>::setDataout(Dataout *d){
 
 template<ThreadInterface Thread>
 void Logger<Thread>::setup(){
+	this->dataout->begin();
 	return;
 }
 

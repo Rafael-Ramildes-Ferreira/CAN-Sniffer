@@ -12,7 +12,7 @@
 
 
 #include "./dataout/sd_card.hpp"
-// #include "./dataout/bluetooth.hpp"
+#include "./dataout/bluetooth.hpp"
 #include "./dataout/serial_port.hpp"
 
 
@@ -20,6 +20,8 @@ void sniffer_main(){
 	Communicator<THREAD> t;
 	Logger<THREAD> t2;
 
+	t2.setStackDepth(4096);
+	
 	std::function<void(void*)> logger_hook (
 		[&t2](void*arg)->void {
 			t2.eventTrigger(arg);
@@ -33,7 +35,7 @@ void sniffer_main(){
 	// t2.setName(name2,sizeof(name2));
 
 	t.launch();
-	t2.setDataout(new SerialPort()).launch();
+	t2.setDataout(new BlueTooth()).launch();
 
 	t.join();
 	t2.join();
