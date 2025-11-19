@@ -11,6 +11,11 @@
 #endif // Not __linux__ 
 
 
+#include "./dataout/sd_card.hpp"
+// #include "./dataout/bluetooth.hpp"
+#include "./dataout/serial_port.hpp"
+
+
 void sniffer_main(){
 	Communicator<THREAD> t;
 	Logger<THREAD> t2;
@@ -22,13 +27,13 @@ void sniffer_main(){
 	);
 
 	t.setMessageReceivedHook(&logger_hook);
-	char name1[] = "Communicator";
-	t.setName(name1,sizeof(name1));
-	char name2[] = "Logger";
-	t2.setName(name2,sizeof(name2));
+	// char name1[] = "Communicator";
+	// t.setName(name1,sizeof(name1));
+	// char name2[] = "Logger";
+	// t2.setName(name2,sizeof(name2));
 
 	t.launch();
-	t2.launch();
+	t2.setDataout(new SerialPort()).launch();
 
 	t.join();
 	t2.join();

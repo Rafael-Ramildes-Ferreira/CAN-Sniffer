@@ -9,9 +9,17 @@
  */
 template<ThreadInterface Thread>
 void Logger<Thread>::eventTrigger(void *arg){
-	// memcpy()
-	std::cout << "[Logger] Receive an event!" << std::endl;
+	if(this->dataout != nullptr){
+		this->dataout->write((const char*)arg);
+	}
 	this->dispatch();
+}
+
+
+template<ThreadInterface Thread>
+Logger<Thread>& Logger<Thread>::setDataout(Dataout *d){
+	this->dataout = d;
+	return *this;
 }
 
 template<ThreadInterface Thread>

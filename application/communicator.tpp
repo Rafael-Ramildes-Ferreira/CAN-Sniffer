@@ -14,7 +14,7 @@ void Communicator<Thread>::loop() {
 	for(long int i = 0; i < 10000000; i++);
 	std::cout << "[Comm] Receiving message!" << std::endl;
 	if(this->message_received_hook != nullptr){
-		(*this->message_received_hook)(nullptr);
+		(*this->message_received_hook)((void*)"[Comm] I've sent a message to Logger!\n");
 	}
 
 	this->dispatch();
