@@ -3,6 +3,13 @@
 
 
 template<ThreadInterface Thread>
+Communicator<Thread>& Communicator<Thread>::setMessageReceivedHook(std::function<void(void*)> *func) {
+	this->message_received_hook = func;
+	return *this; 
+};
+
+
+template<ThreadInterface Thread>
 void Communicator<Thread>::setup() {
 	// Initialize communication interfaces
 	// Configure CAN bus, serial ports, etc.

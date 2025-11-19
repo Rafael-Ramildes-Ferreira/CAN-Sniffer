@@ -11,8 +11,8 @@ private:
 	std::function<void(void*)> *message_received_hook;
 public:
 	Communicator() : message_received_hook(nullptr) {};
-	Communicator& setMessageReceivedHook(std::function<void(void*)> *func) 
-		{message_received_hook = func; return *this; };
+	
+	Communicator& setMessageReceivedHook(std::function<void(void*)> *func);
 
 	void setup() override;
 	void loop() override;

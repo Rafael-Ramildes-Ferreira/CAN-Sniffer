@@ -9,17 +9,10 @@ class SerialPort : public Dataout
 {
 public:
 	// ESP-IDF already starts the serial port for printing.
-	int begin() override { return 0; };
-	int write(const char *text) override { printf(text); return 0; };
-	int fwrite(const char *text, ...) override { 
-		va_list args;
-		va_start(args, text);
-		// vprintf(text, args);
-		printf(text, args);
-		va_end(args); 
-		return 0; 
-	};
-	const char * read() override { return nullptr; };
+	int begin() override;
+	int write(const char *text) override;
+	int fwrite(const char *text, ...) override;
+	const char * read() override;
 };
 
 #endif // SERIALPORT_HPP
