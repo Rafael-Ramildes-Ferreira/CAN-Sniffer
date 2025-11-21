@@ -50,15 +50,18 @@ int BlueTooth::begin(){
 int BlueTooth::write(const char *text){
 	int totalLen = strlen(text);
 	const int PACKET_SIZE = NimBLEDevice::getMTU() - 3;
+	char buffer[PACKET_SIZE];
 
-	for(int i = 0; i < totalLen; i += PACKET_SIZE) {
-		int chunk = min(PACKET_SIZE, totalLen - i);
+	for(int i = 0; i < totalLen; i += PACKET_SIZE - 1) {
+		int chunk = min(PACKET_SIZE - 1, totalLen - i);
+		memcpy(buffer, text + i, chunk);
+		buffer[chunk] = '\0';
 
-		this->characteristic->setValue(text + i);
+		this->characteristic->setValue(buffer);
 		if(!this->characteristic->notify()){
 			return 1;
 		}
-		vTaskDelay(5/portTICK_PERIOD_MS);  // [Todo: add delay method in thread class]
+		vTaskDelay(100/portTICK_PERIOD_MS);  // [Todo: add delay method in thread class]
 	}
 	return 0;
 }
